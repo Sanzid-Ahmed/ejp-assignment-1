@@ -27,7 +27,7 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-            <Link href="/itemList/" className="text-black">
+            <Link href="/itemList" className="text-black">
               Item List
             </Link>
           </li>
