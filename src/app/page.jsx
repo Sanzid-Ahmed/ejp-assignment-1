@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 
-export default function HomePage() {
+export default function Home() {
   const features = [
     { title: "Fast Delivery", desc: "Get your products delivered quickly." },
     { title: "Quality Products", desc: "Only the best quality items." },
@@ -24,7 +24,7 @@ export default function HomePage() {
 
   return (
     <main className="font-sans">
-      {/* Hero Section */}
+      
       <section className="bg-gray-100 py-20 text-center relative">
         <div className="max-w-3xl mx-auto px-4">
           <h1 className="text-4xl md:text-6xl font-bold mb-4 text-black">
@@ -42,7 +42,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features Section */}
+      
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-8 text-black">Our Features</h2>
@@ -60,7 +60,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Products Section */}
+      
       <section className="py-16 bg-gray-50">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-8 text-black">Our Products</h2>
@@ -85,7 +85,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-8 text-black">Testimonials</h2>
@@ -95,7 +95,7 @@ export default function HomePage() {
                 key={i}
                 className="p-6 border rounded-lg hover:shadow-lg transition text-black"
               >
-                <p className="text-gray-600 mb-4">"{t.feedback}"</p>
+                <p className="text-gray-600 mb-4">{t.feedback}</p>
                 <p className="font-semibold">{t.name}</p>
               </div>
             ))}
@@ -103,7 +103,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Banner Section */}
+      
       <section className="py-20 bg-blue-600 text-white text-center rounded-lg mx-4 md:mx-20 my-16">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
           Special Offer: 20% Off All Products!

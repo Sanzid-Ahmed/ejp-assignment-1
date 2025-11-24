@@ -17,27 +17,26 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-white shadow-md text-black">
       <nav className="max-w-7xl mx-auto flex justify-between items-center p-4">
 
-        {/* Logo */}
+        
         <Link href="/" className="text-2xl font-bold text-black">
           MyShop
         </Link>
 
-        {/* Desktop Menu */}
+      
         <ul className="hidden md:flex items-center gap-6 font-medium text-black">
           <li><Link href="/" className="text-black">Home</Link></li>
           <li><Link href="/products" className="text-black">Products</Link></li>
-          <li><Link href="/about" className="text-black">About</Link></li>
-          <li><Link href="/contact" className="text-black">Contact</Link></li>
+          <li><Link href="/itemList/" className="text-black">Item List</Link></li>
+          <li><Link href="/contact" className="text-black">About</Link></li>
 
-          {/* If NOT logged in */}
+          
           {!user && (
             <>
               <li><Link href="/login" className="text-black">Login</Link></li>
-              <li><Link href="/register" className="text-black">Register</Link></li>
             </>
           )}
 
-          {/* If logged in → Dropdown */}
+          
           {user && (
             <div className="relative text-black">
               <button
@@ -78,7 +77,7 @@ export default function Navbar() {
           )}
         </ul>
 
-        {/* Mobile Menu Button */}
+
         <button
           className="md:hidden text-3xl text-black"
           onClick={() => setOpen(!open)}
@@ -87,19 +86,18 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile Menu */}
+     
       {open && (
         <div className="md:hidden bg-white shadow-md text-black">
           <ul className="flex flex-col p-4 gap-3 text-black">
             <Link href="/" className="text-black" onClick={() => setOpen(false)}>Home</Link>
             <Link href="/products" className="text-black" onClick={() => setOpen(false)}>Products</Link>
-            <Link href="/about" className="text-black" onClick={() => setOpen(false)}>About</Link>
-            <Link href="/contact" className="text-black" onClick={() => setOpen(false)}>Contact</Link>
+            <Link href="/itemList/" className="text-black" onClick={() => setOpen(false)}>Item List</Link>
+            <Link href="/contact" className="text-black" onClick={() => setOpen(false)}>About</Link>
 
             {!user && (
               <>
                 <Link href="/login" className="text-black" onClick={() => setOpen(false)}>Login</Link>
-                <Link href="/register" className="text-black" onClick={() => setOpen(false)}>Register</Link>
               </>
             )}
 
