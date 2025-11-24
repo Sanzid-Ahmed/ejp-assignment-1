@@ -16,27 +16,42 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md text-black">
       <nav className="max-w-7xl mx-auto flex justify-between items-center p-4">
-
-        
         <Link href="/" className="text-2xl font-bold text-black">
           MyShop
         </Link>
 
-      
         <ul className="hidden md:flex items-center gap-6 font-medium text-black">
-          <li><Link href="/" className="text-black">Home</Link></li>
-          <li><Link href="/products" className="text-black">Products</Link></li>
-          <li><Link href="/itemList/" className="text-black">Item List</Link></li>
-          <li><Link href="/contact" className="text-black">About</Link></li>
+          <li>
+            <Link href="/" className="text-black">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link href="/itemList/" className="text-black">
+              Item List
+            </Link>
+          </li>
+          <li>
+            <Link href="/about" className="text-black">
+              About
+            </Link>
+          </li>
+          <li>
+            <Link href="/contactUs" className="text-black">
+              Contact
+            </Link>
+          </li>
 
-          
           {!user && (
             <>
-              <li><Link href="/login" className="text-black">Login</Link></li>
+              <li>
+                <Link href="/login" className="text-black">
+                  Login
+                </Link>
+              </li>
             </>
           )}
 
-          
           {user && (
             <div className="relative text-black">
               <button
@@ -49,7 +64,9 @@ export default function Navbar() {
 
               {dropdown && (
                 <div className="absolute right-0 mt-2 w-48 bg-white shadow-md rounded-md p-2 text-sm text-black">
-                  <p className="px-2 py-2 border-b font-semibold text-black">{user.email}</p>
+                  <p className="px-2 py-2 border-b font-semibold text-black">
+                    {user.email}
+                  </p>
 
                   <Link
                     href="/add-product"
@@ -77,7 +94,6 @@ export default function Navbar() {
           )}
         </ul>
 
-
         <button
           className="md:hidden text-3xl text-black"
           onClick={() => setOpen(!open)}
@@ -86,18 +102,47 @@ export default function Navbar() {
         </button>
       </nav>
 
-     
       {open && (
         <div className="md:hidden bg-white shadow-md text-black">
           <ul className="flex flex-col p-4 gap-3 text-black">
-            <Link href="/" className="text-black" onClick={() => setOpen(false)}>Home</Link>
-            <Link href="/products" className="text-black" onClick={() => setOpen(false)}>Products</Link>
-            <Link href="/itemList/" className="text-black" onClick={() => setOpen(false)}>Item List</Link>
-            <Link href="/contact" className="text-black" onClick={() => setOpen(false)}>About</Link>
+            <Link
+              href="/"
+              className="text-black"
+              onClick={() => setOpen(false)}
+            >
+              Home
+            </Link>
+            <Link
+              href="/itemList/"
+              className="text-black"
+              onClick={() => setOpen(false)}
+            >
+              Item List
+            </Link>
+            <Link
+              href="/about"
+              className="text-black"
+              onClick={() => setOpen(false)}
+            >
+              About
+            </Link>
+            <Link
+              href="/contactUs"
+              className="text-black"
+              onClick={() => setOpen(false)}
+            >
+              Contact
+            </Link>
 
             {!user && (
               <>
-                <Link href="/login" className="text-black" onClick={() => setOpen(false)}>Login</Link>
+                <Link
+                  href="/login"
+                  className="text-black"
+                  onClick={() => setOpen(false)}
+                >
+                  Login
+                </Link>
               </>
             )}
 
@@ -105,9 +150,21 @@ export default function Navbar() {
               <>
                 <p className="font-semibold text-black">{user.email}</p>
 
-                <Link href="/add-product" className="text-black" onClick={() => setOpen(false)}>Add Product</Link>
+                <Link
+                  href="/add-product"
+                  className="text-black"
+                  onClick={() => setOpen(false)}
+                >
+                  Add Product
+                </Link>
 
-                <Link href="/manage-products" className="text-black" onClick={() => setOpen(false)}>Manage Products</Link>
+                <Link
+                  href="/manage-products"
+                  className="text-black"
+                  onClick={() => setOpen(false)}
+                >
+                  Manage Products
+                </Link>
 
                 <button
                   onClick={() => {
