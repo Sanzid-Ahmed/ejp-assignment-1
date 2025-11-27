@@ -1,16 +1,36 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { auth } from "@/lib/firebase";
+import { onAuthStateChanged, signOut as firebaseSignOut } from "firebase/auth";
 
 export default function Navbar() {
   const [user, setUser] = useState(null);
   const [open, setOpen] = useState(false);
   const [dropdown, setDropdown] = useState(false);
 
+  // Track auth state
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser({
+          name: currentUser.displayName,
+          email: currentUser.email,
+        });
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   function signOut() {
-    setUser(null);
+    firebaseSignOut(auth)
+      .then(() => setUser(null))
+      .catch((error) => console.error(error));
     setDropdown(false);
-    window.location.reload();
+    setOpen(false);
   }
 
   return (
@@ -43,13 +63,11 @@ export default function Navbar() {
           </li>
 
           {!user && (
-            <>
-              <li>
-                <Link href="/login" className="text-black">
-                  Login
-                </Link>
-              </li>
-            </>
+            <li>
+              <Link href="/login" className="text-black">
+                Login
+              </Link>
+            </li>
           )}
 
           {user && (
@@ -105,72 +123,39 @@ export default function Navbar() {
       {open && (
         <div className="md:hidden bg-white shadow-md text-black">
           <ul className="flex flex-col p-4 gap-3 text-black">
-            <Link
-              href="/"
-              className="text-black"
-              onClick={() => setOpen(false)}
-            >
+            <Link href="/" className="text-black" onClick={() => setOpen(false)}>
               Home
             </Link>
-            <Link
-              href="/itemList/"
-              className="text-black"
-              onClick={() => setOpen(false)}
-            >
+            <Link href="/itemList/" className="text-black" onClick={() => setOpen(false)}>
               Item List
             </Link>
-            <Link
-              href="/about"
-              className="text-black"
-              onClick={() => setOpen(false)}
-            >
+            <Link href="/about" className="text-black" onClick={() => setOpen(false)}>
               About
             </Link>
-            <Link
-              href="/contactUs"
-              className="text-black"
-              onClick={() => setOpen(false)}
-            >
+            <Link href="/contactUs" className="text-black" onClick={() => setOpen(false)}>
               Contact
             </Link>
 
             {!user && (
-              <>
-                <Link
-                  href="/login"
-                  className="text-black"
-                  onClick={() => setOpen(false)}
-                >
-                  Login
-                </Link>
-              </>
+              <Link href="/login" className="text-black" onClick={() => setOpen(false)}>
+                Login
+              </Link>
             )}
 
             {user && (
               <>
                 <p className="font-semibold text-black">{user.email}</p>
 
-                <Link
-                  href="/add-product"
-                  className="text-black"
-                  onClick={() => setOpen(false)}
-                >
+                <Link href="/add-product" className="text-black" onClick={() => setOpen(false)}>
                   Add Product
                 </Link>
 
-                <Link
-                  href="/manage-products"
-                  className="text-black"
-                  onClick={() => setOpen(false)}
-                >
+                <Link href="/manage-products" className="text-black" onClick={() => setOpen(false)}>
                   Manage Products
                 </Link>
 
                 <button
-                  onClick={() => {
-                    signOut();
-                    setOpen(false);
-                  }}
+                  onClick={signOut}
                   className="text-left text-red-600"
                 >
                   Logout

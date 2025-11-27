@@ -1,24 +1,45 @@
-
-"use client"; 
-
+"use client";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "@/lib/firebase";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    
-    console.log("Email:", email);
-    console.log("Password:", password);
-    alert("Login clicked! Check console for values.");
+    setError("");
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log("User Logged In:", userCredential.user);
+      router.push("/dashboard");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    setError("");
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      console.log("Google User:", result.user);
+      router.push("/dashboard");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 text-black">
       <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
+
+        {error && <p className="text-red-500 text-center mb-3">{error}</p>}
+
         <form onSubmit={handleLogin} className="flex flex-col">
           <label className="mb-2 font-medium">Email</label>
           <input
@@ -42,13 +63,22 @@ export default function Login() {
 
           <button
             type="submit"
-            className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-colors"
+            className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-colors mb-4"
           >
             Login
           </button>
         </form>
 
-        <p className="text-center mt-4 text-gray-600">Do not have an account? <a href="/register" className="text-blue-500">Register</a>
+        <button
+          onClick={handleGoogleLogin}
+          className="bg-red-500 text-white p-2 rounded hover:bg-red-600 transition-colors w-full"
+        >
+          Sign in with Google
+        </button>
+
+        <p className="text-center mt-4 text-gray-600">
+          Do not have an account?{" "}
+          <a href="/register" className="text-blue-500">Register</a>
         </p>
       </div>
     </div>
