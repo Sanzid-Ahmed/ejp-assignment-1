@@ -21,7 +21,7 @@ export default function Register() {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(userCredential.user, { displayName: name });
       alert("Registration successful!");
-      router.push("/login");
+      router.push("/");
     } catch (error) {
       alert(error.message);
       console.error(error);
@@ -33,7 +33,7 @@ export default function Register() {
       const result = await signInWithPopup(auth, googleProvider);
       console.log("Google User:", result.user);
       alert("Logged in with Google!");
-      router.push("/dashboard"); // Redirect after Google login
+      router.push("/");
     } catch (error) {
       alert(error.message);
       console.error(error);

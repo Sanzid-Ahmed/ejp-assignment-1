@@ -16,7 +16,7 @@ export default function Login() {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("User Logged In:", userCredential.user);
-      router.push("/dashboard");
+      router.push("/");
     } catch (err) {
       setError(err.message);
     }
@@ -27,7 +27,7 @@ export default function Login() {
     try {
       const result = await signInWithPopup(auth, googleProvider);
       console.log("Google User:", result.user);
-      router.push("/dashboard");
+      router.push("/");
     } catch (err) {
       setError(err.message);
     }
